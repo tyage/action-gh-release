@@ -7,8 +7,9 @@ import { env } from "process";
 async function run() {
   try {
     const config = parseConfig(env);
+    config.input_tag_name = 'hoge';
     if (!config.input_tag_name && !isTag(config.github_ref)) {
-      throw new Error(`⚠️ GitHub Releases requires a tag`);
+      throw new Error(`⚠️ GitHub Releases requires a tag: ${config.input_tag_name}`);
     }
     if (config.input_files) {
       const patterns = unmatchedPatterns(config.input_files);
